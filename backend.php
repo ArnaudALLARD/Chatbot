@@ -38,7 +38,7 @@ if ($userMessage === "start") {
 
 // Configuration des messages pour la conversation sur le savoir-faire français
 $postData = [
-    "model" => "gpt-3.5-turbo", 
+    "model" => "gpt-4o", 
     "messages" => [
         ["role" => "system", "content" => "Tu es un chatbot spécialisé dans le savoir-faire français. Réponds de manière détaillée et intéressante sur des sujets comme la cuisine, l'artisanat, et les traditions de la France. Tout ce qui se rapporte au savoir-faire. Donne aux gens envie de s'y intéresser. Tu t'adresses à un public non-français."],
         ["role" => "user", "content" => $userMessage]
