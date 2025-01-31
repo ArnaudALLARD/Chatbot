@@ -1,33 +1,70 @@
 <?php
+// Activer les headers pour JSON et les CORS
 header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *");
 
-$api_key = "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";
+// Activer l'affichage des erreurs pour le débogage
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Récupérer les données de la requête POST
 $data = json_decode(file_get_contents("php://input"), true);
-$user_message = $data["message"];
 
-$prompt = "Tu es un expert du savoir-faire français. Réponds avec précision et bienveillance. \n\nUtilisateur : $user_message\nChatbot : ";
+// Vérifier que le message a été envoyé
+if (!isset($data['message']) || empty($data['message'])) {
+    echo json_encode(["error" => "Aucun message n'a été envoyé"]);
+    exit;
+}
 
-$api_url = "https://api.openai.com/v1/completions";
-$post_fields = json_encode([
-    "model" => "gpt-4",
-    "prompt" => $prompt,
+$userMessage = $data['message'];
+
+// Clé API OpenAI (Assure-toi de la définir dans Render ou de la remplacer ici)
+$apiKey = getenv("OPENAI_API_KEY");
+if (!$apiKey) {
+    echo json_encode(["error" => "Clé API OpenAI manquante"]);
+    exit;
+}
+
+// Configuration de la requête pour OpenAI
+$apiUrl = "https://api.openai.com/v1/completions";
+$postData = [
+    "model" => "text-davinci-003",
+    "prompt" => $userMessage,
     "max_tokens" => 150,
     "temperature" => 0.7
+];
+
+// Options pour l'appel à l'API
+$options = [
+    "http" => [
+        "header" => "Content-Type: application/json\r\n" .
+                    "Authorization: Bearer $apiKey\r\n",
+        "method" => "POST",
+        "content" => json_encode($postData),
+    ],
+];
+
+// Exécuter la requête vers l'API OpenAI
+$context = stream_context_create($options);
+$result = @file_get_contents($apiUrl, false, $context);
+
+// Vérifier si la requête a échoué
+if ($result === FALSE) {
+    echo json_encode(["error" => "Erreur lors de l'appel à l'API OpenAI"]);
+    exit;
+}
+
+// Décoder la réponse JSON de l'API
+$response = json_decode($result, true);
+
+// Vérifier si la clé "choices" existe et contient des données
+if (!isset($response['choices'][0]['text'])) {
+    echo json_encode(["error" => "Réponse invalide de l'API OpenAI"]);
+    exit;
+}
+
+// Retourner la réponse au frontend
+echo json_encode([
+    "reply" => trim($response['choices'][0]['text'])
 ]);
-
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $api_url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    "Content-Type: application/json",
-    "Authorization: Bearer $api_key"
-]);
-
-$response = curl_exec($ch);
-curl_close($ch);
-
-$response_data = json_decode($response, true);
-echo json_encode(["reply" => $response_data["choices"][0]["text"]]);
-?>
