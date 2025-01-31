@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
 
-$api_key = "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";
+$api_key = "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";
 $data = json_decode(file_get_contents("php://input"), true);
 $user_message = $data["message"];
 
