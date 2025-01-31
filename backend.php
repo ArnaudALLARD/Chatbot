@@ -27,10 +27,12 @@ if (!$apiKey) {
 }
 
 // Configuration de la requête pour OpenAI
-$apiUrl = "https://api.openai.com//v1/chat/completions";
+$apiUrl = "https://api.openai.com/v1/chat/completions";
 $postData = [
-    "model" => "gpt-3.5-turbo",
-    "prompt" => $userMessage,
+    "model" => "gpt-3.5-turbo",  // Utilisation d'un modèle compatible avec chat
+    "messages" => [
+        ["role" => "user", "content" => $userMessage]
+    ],
     "max_tokens" => 150,
     "temperature" => 0.7
 ];
@@ -58,13 +60,17 @@ if ($result === FALSE) {
 // Décoder la réponse JSON de l'API
 $response = json_decode($result, true);
 
+// Vérification de la structure de la réponse pour débogage
+var_dump($response);  // Affiche la réponse complète pour déboguer
+
 // Vérifier si la clé "choices" existe et contient des données
-if (!isset($response['choices'][0]['text'])) {
+if (!isset($response['choices'][0]['message']['content'])) {
     echo json_encode(["error" => "Réponse invalide de l'API OpenAI"]);
     exit;
 }
 
 // Retourner la réponse au frontend
 echo json_encode([
-    "reply" => trim($response['choices'][0]['text'])
+    "reply" => trim($response['choices'][0]['message']['content'])
 ]);
+?>
