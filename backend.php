@@ -27,7 +27,7 @@ if (!$apiKey) {
 }
 
 // Configuration de la requête pour OpenAI
-$apiUrl = "https://api.openai.com/v1/completions";
+$apiUrl = "https://api.openai.com//v1/chat/completions";
 $postData = [
     "model" => "gpt-3.5-turbo",
     "prompt" => $userMessage,
