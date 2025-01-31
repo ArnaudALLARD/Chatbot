@@ -23,7 +23,7 @@ if (!isset($data['message']) || empty($data['message'])) {
 $userMessage = $data['message'];
 
 // Clé API OpenAI (Assure-toi de la définir dans Render ou de la remplacer ici)
-$apiKey = "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";
+$apiKey = "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";
 if (!$apiKey) {
     echo json_encode(["error" => "Clé API OpenAI manquante"]);
     exit;
