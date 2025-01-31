@@ -25,7 +25,8 @@
             appendMessage("Chatbot", data.reply, "bot");
         };
 
-        document.getElementById("send").addEventListener("click", async function() {
+        // Fonction pour envoyer un message
+        async function sendMessage() {
             let userText = document.getElementById("userInput").value;
             if (!userText.trim()) return;
             
@@ -40,8 +41,20 @@
 
             let data = await response.json();
             appendMessage("Chatbot", data.reply, "bot");
+        }
+
+        // Envoi du message lorsque l'on clique sur le bouton "Envoyer"
+        document.getElementById("send").addEventListener("click", sendMessage);
+
+        // Envoi du message lorsque l'on appuie sur la touche "Enter"
+        document.getElementById("userInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Empêche le formulaire de se soumettre
+                sendMessage(); // Appelle la fonction pour envoyer le message
+            }
         });
 
+        // Fonction pour afficher le message dans le chat
         function appendMessage(sender, text, className) {
             let chatbox = document.getElementById("chatbox");
             let messageDiv = document.createElement("div");
