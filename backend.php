@@ -11,6 +11,9 @@ error_reporting(E_ALL);
 // Récupérer les données de la requête POST
 $data = json_decode(file_get_contents("php://input"), true);
 
+// Debug : Affiche les données reçues
+var_dump($data);  // Affiche le contenu du message reçu pour débogage
+
 // Vérifier que le message a été envoyé
 if (!isset($data['message']) || empty($data['message'])) {
     echo json_encode(["error" => "Aucun message n'a été envoyé"]);
@@ -53,24 +56,22 @@ $result = @file_get_contents($apiUrl, false, $context);
 
 // Vérifier si la requête a échoué
 if ($result === FALSE) {
-    echo json_encode(["error" => "Erreur lors de l'appel à l'API OpenAI"]);
+    echo json_encode(["error" => "Erreur lors de l'appel à l'API OpenAI", "details" => error_get_last()]);
     exit;
 }
 
 // Décoder la réponse JSON de l'API
 $response = json_decode($result, true);
 
-// Vérification de la structure de la réponse pour débogage
+// Debug : Affiche la réponse complète de l'API OpenAI pour débogage
 var_dump($response);  // Affiche la réponse complète pour déboguer
 
 // Vérifier si la clé "choices" existe et contient des données
-if (!isset($response['choices'][0]['message']['content'])) {
+if (isset($response['choices'][0]['message']['content'])) {
+    echo json_encode([
+        "reply" => trim($response['choices'][0]['message']['content'])
+    ]);
+} else {
     echo json_encode(["error" => "Réponse invalide de l'API OpenAI"]);
-    exit;
 }
-
-// Retourner la réponse au frontend
-echo json_encode([
-    "reply" => trim($response['choices'][0]['message']['content'])
-]);
 ?>
