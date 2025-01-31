@@ -43,7 +43,7 @@ $postData = [
         ["role" => "system", "content" => "Tu es un chatbot spécialisé dans le savoir-faire français. Réponds de manière détaillée et intéressante sur des sujets comme la cuisine, l'artisanat, et les traditions de la France. Tout ce qui se rapporte au savoir-faire. Donne aux gens envie de s'y intéresser. Tu t'adresses à un public non-français."],
         ["role" => "user", "content" => $userMessage]
     ],
-    "max_tokens" => 150,
+    "max_tokens" => 1500,
     "temperature" => 0.7
 ];
 
