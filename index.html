@@ -20,7 +20,7 @@
             appendMessage("Vous", userText, "user");
             document.getElementById("userInput").value = "";
 
-            let response = await fetch("backend.php", {
+            let response = await fetch("https://chatbot-omy3.onrender.com", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: userText })
