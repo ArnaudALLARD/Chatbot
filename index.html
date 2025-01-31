@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot Savoir-Faire Français</title>
     <link rel="stylesheet" href="style.css">
-<script nonce="LJPAiXFUNqZ8Aref" type="text/javascript" src="//self.adblockultimate.net/manager.js?tm=1737484474&amp;lg=true" guid="{1C37AEA4-62E1-4776-BDFF-7D5D74CF13DA}" inwhitelist="false" status="true" autohide="true"></script></head>
+</head>
 <body>
     <h2>Chatbot - Savoir-Faire Français</h2>
     <div id="chatbox"></div>
@@ -20,6 +20,7 @@
             appendMessage("Vous", userText, "user");
             document.getElementById("userInput").value = "";
 
+            // Envoie de la requête au backend
             let response = await fetch("https://chatbot-omy3.onrender.com/backend.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -27,7 +28,12 @@
             });
 
             let data = await response.json();
-            appendMessage("Chatbot", data.reply, "bot");
+
+            // Débogage : afficher la réponse du backend
+            console.log(data);  // Vérifie ce qui est renvoyé par le backend
+
+            // Si data.reply est valide, afficher la réponse
+            appendMessage("Chatbot", data.reply || "Je n'ai pas compris.", "bot");
         });
 
         function appendMessage(sender, text, className) {
