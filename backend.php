@@ -29,7 +29,7 @@ if (!$apiKey) {
 // Configuration de la requête pour OpenAI
 $apiUrl = "https://api.openai.com/v1/completions";
 $postData = [
-    "model" => "text-davinci-003",
+    "model" => "gpt-3.5-turbo",
     "prompt" => $userMessage,
     "max_tokens" => 150,
     "temperature" => 0.7
