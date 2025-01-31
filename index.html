@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Savoir-Faire Français</title>
+    <link rel="stylesheet" href="style.css">
+<script nonce="LJPAiXFUNqZ8Aref" type="text/javascript" src="//self.adblockultimate.net/manager.js?tm=1737484474&amp;lg=true" guid="{1C37AEA4-62E1-4776-BDFF-7D5D74CF13DA}" inwhitelist="false" status="true" autohide="true"></script></head>
+<body>
+    <h2>Chatbot - Savoir-Faire Français</h2>
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Posez une question...">
+    <button id="send">Envoyer</button>
+
+    <script>
+        document.getElementById("send").addEventListener("click", async function() {
+            let userText = document.getElementById("userInput").value;
+            if (!userText.trim()) return;
+            
+            appendMessage("Vous", userText, "user");
+            document.getElementById("userInput").value = "";
+
+            let response = await fetch("backend.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userText })
+            });
+
+            let data = await response.json();
+            appendMessage("Chatbot", data.reply, "bot");
+        });
+
+        function appendMessage(sender, text, className) {
+            let chatbox = document.getElementById("chatbox");
+            let messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", className);
+            messageDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
+            chatbox.appendChild(messageDiv);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
