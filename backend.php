@@ -28,9 +28,19 @@ if (!$apiKey) {
 
 // Configuration de la requête pour OpenAI
 $apiUrl = "https://api.openai.com/v1/chat/completions";
+
+// Si c'est la première interaction (pas de message), envoyer l'introduction
+if ($userMessage === "start") {
+    $introduction = "Bonjour! Je suis votre conseiller en savoir-faire français. Saviez-vous que la France est célèbre pour ses techniques artisanales comme la fabrication de fromages, le tissage de tapisseries, et la haute couture? Voulez-vous en savoir plus sur un sujet en particulier? Ou peut-être une anecdote intéressante ?";
+    echo json_encode(["reply" => $introduction]);
+    exit;
+}
+
+// Configuration des messages pour la conversation sur le savoir-faire français
 $postData = [
     "model" => "gpt-3.5-turbo", 
     "messages" => [
+        ["role" => "system", "content" => "Tu es un chatbot spécialisé dans le savoir-faire français. Réponds de manière détaillée et intéressante sur des sujets comme la cuisine, l'artisanat, l'histoire, et les traditions de la France."],
         ["role" => "user", "content" => $userMessage]
     ],
     "max_tokens" => 150,
@@ -40,8 +50,7 @@ $postData = [
 // Options pour l'appel à l'API
 $options = [
     "http" => [
-        "header" => "Content-Type: application/json\r\n" .
-                    "Authorization: Bearer $apiKey\r\n",
+        "header" => "Content-Type: application/json\r\n" . "Authorization: Bearer $apiKey\r\n",
         "method" => "POST",
         "content" => json_encode($postData),
     ],
