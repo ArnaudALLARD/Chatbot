@@ -31,7 +31,8 @@ $apiUrl = "https://api.openai.com/v1/chat/completions";
 
 // Si c'est la première interaction (pas de message), envoyer l'introduction
 if ($userMessage === "start") {
-    $introduction = "Bonjour! Le savoir-faire français vous intéresse ? Ca tombe bien, je suis un expert ! Saviez-vous que la France est célèbre pour ses techniques artisanales comme la fabrication de fromages, le tissage de tapisseries, et la haute couture? Voulez-vous en savoir plus sur un sujet en particulier? Ou peut-être une anecdote intéressante ?";
+    $introduction = "
+Bonjour ! Le savoir-faire français vous passionne ? Ça tombe bien, je suis un expert ! Saviez-vous que la France est renommée pour son excellence dans l’artisanat, la gastronomie, et l’innovation, du travail du cuir à la haute cuisine en passant par l’aéronautique ? Voulez-vous en découvrir davantage sur un domaine en particulier ou entendre une anecdote fascinante ?";
     echo json_encode(["reply" => $introduction]);
     exit;
 }
