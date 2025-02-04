@@ -1,3 +1,19 @@
+/* Drapeau français */
+.flag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.flag img {
+    width: 100%; /* Adapte l'image à la taille du container */
+    height: auto; /* Maintient les proportions de l'image */
+}
+
 /* Mise en page globale */
 body {
     font-family: 'Poppins', sans-serif;
@@ -27,17 +43,6 @@ h2 {
     margin-bottom: 15px;
 }
 
-/* Drapeau français */
-.flag {
-    width: 60px;
-    height: 40px;
-    background: linear-gradient(90deg, #0055A4 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #EF4135 66.6%);
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border-radius: 5px;
-}
-
 /* Fenêtre de chat */
 #chatbox {
     width: 100%;
@@ -49,8 +54,8 @@ h2 {
     border-radius: 10px;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
-    font-family: 'Poppins', sans-serif; /* Assurer que toute la fenêtre de chat utilise la bonne police */
-    font-size: 16px; /* Taille uniforme pour tous les messages */
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
 }
 
 /* Barre de saisie */
@@ -95,9 +100,9 @@ h2 {
     display: inline-block;
     word-wrap: break-word;
     line-height: 1.5;
-    font-size: 16px; /* Assurer que la taille est uniformisée */
-    font-family: 'Poppins', sans-serif; /* Assurer que la police est la même */
-    font-weight: normal; /* Enlever le gras */
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
 }
 
 /* Message de l'utilisateur */
@@ -127,9 +132,9 @@ h2 {
 /* Animation des points de chargement */
 .loading-dots {
     display: inline-block;
-    font-size: 16px; /* Assurer la même taille que le texte normal */
-    font-family: 'Poppins', sans-serif; /* Assurer que la police est la même */
-    font-weight: normal; /* Enlever le gras */
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
     animation: dots 1.5s steps(5, end) infinite;
 }
 
@@ -143,16 +148,15 @@ h2 {
 /* Animation de frappe */
 .typing {
     display: inline-block;
-    font-size: 16px; /* Assurer que la taille est uniformisée */
-    font-family: 'Poppins', sans-serif; /* Assurer que la police est la même */
-    font-weight: normal; /* Enlever le gras */
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
 }
 
-/* Définir une taille uniforme pour tous les messages */
 .message {
-    font-size: 16px; /* Taille uniforme des messages */
-    font-family: 'Poppins', sans-serif; /* Police uniforme */
-    font-weight: normal; /* Enlever le gras */
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
 }
 
 /* Améliorations générales */
