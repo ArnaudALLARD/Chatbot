@@ -49,7 +49,7 @@ $postData = [
         ["role" => "system", "content" => "Tu es un chatbot spécialisé dans le savoir-faire français..."],
         ["role" => "user", "content" => $userMessage]
     ],
-    "max_tokens" => 800,  // Ajustement automatique via le frontend recommandé
+    "max_tokens" => 1100,  // Ajustement automatique via le frontend recommandé
     "temperature" => 0.8,  // Plus de créativité et de variété
     "top_p" => 0.9,  // Couvre une plus large gamme d'idées
     "frequency_penalty" => 0.3,  // Limite les répétitions
