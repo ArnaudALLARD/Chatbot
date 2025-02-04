@@ -13,6 +13,21 @@
     width: 100%; /* Adapte l'image à la taille du container */
     height: auto; /* Maintient les proportions de l'image */
 }
+/* Drapeau canadien */
+.flag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.flag img {
+    width: 100%; /* Adapte l'image à la taille du container */
+    height: auto; /* Maintient les proportions de l'image */
+}
 
 /* Mise en page globale */
 body {
