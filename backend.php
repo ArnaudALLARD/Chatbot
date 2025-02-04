@@ -48,8 +48,7 @@ $postData = [
   "temperature": 0.7,
   "top_p": 0.9,
   "frequency_penalty": 0.2,
-  "presence_penalty": 0.3,
-  "stop": ["\n\n", "Conclusion :"]
+  "presence_penalty": 0.3
 ];
 
 // Options pour l'appel à l'API
