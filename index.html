@@ -10,6 +10,7 @@
     <div class="container">
         <h2>Le Savoir-Faire Français</h2>
         <div id="chatbox"></div>
+        <div id="loadingIndicator" style="display:none;">Chargement...</div> <!-- Indicateur de chargement -->
         <div class="input-container">
             <input type="text" id="userInput" placeholder="Message">
             <button id="send">Envoi</button>
@@ -37,6 +38,9 @@
             appendMessage("Vous", userText, "user");
             document.getElementById("userInput").value = "";
 
+            // Afficher l'indicateur de chargement
+            document.getElementById("loadingIndicator").style.display = "block";
+
             let response = await fetch("https://chatbot-omy3.onrender.com/backend.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -44,6 +48,10 @@
             });
 
             let data = await response.json();
+
+            // Cacher l'indicateur de chargement
+            document.getElementById("loadingIndicator").style.display = "none";
+
             appendMessage("Chatbot", data.reply, "bot");
         }
 
@@ -63,9 +71,20 @@
             let chatbox = document.getElementById("chatbox");
             let messageDiv = document.createElement("div");
             messageDiv.classList.add("message", className);
-            messageDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
+            messageDiv.innerHTML = `<strong>${sender}:</strong> `;
+
             chatbox.appendChild(messageDiv);
             chatbox.scrollTop = chatbox.scrollHeight;
+
+            // Simuler un "taper à la machine"
+            let i = 0;
+            let interval = setInterval(() => {
+                messageDiv.innerHTML += text.charAt(i);
+                i++;
+                if (i === text.length) {
+                    clearInterval(interval); // Arrêter l'intervalle une fois tout le texte affiché
+                }
+            }, 50);  // Change ce délai pour accélérer ou ralentir le "taper"
         }
     </script>
 </body>
