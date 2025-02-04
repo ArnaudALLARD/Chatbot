@@ -49,7 +49,6 @@ $postData = [
   "top_p": 0.9,
   "frequency_penalty": 0.2,
   "presence_penalty": 0.3,
-  "length_penalty": -0.2,
   "stop": ["\n\n", "Conclusion :"]
 ];
 
