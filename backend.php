@@ -50,11 +50,7 @@ $postData = [
         ["role" => "user", "content" => $userMessage]
     ],
     "max_tokens" => 1100,  // Ajustement automatique via le frontend recommandé
-    "temperature" => 0.8,  // Plus de créativité et de variété
-    "top_p" => 0.9,  // Couvre une plus large gamme d'idées
-    "frequency_penalty" => 0.3,  // Limite les répétitions
-    "presence_penalty" => 0.6,  // Encourage l'introduction de nouvelles idées
-    "length_penalty" => -0.2  // Réduit les réponses trop longues
+    "temperature" => 0.8  // Plus de créativité et de variété
 ];
 
 // Utilisation de cURL pour envoyer la requête
