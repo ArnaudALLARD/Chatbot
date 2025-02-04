@@ -29,11 +29,33 @@
             display: inline-block;
             font-size: 16px;
         }
+
+        /* Drapeau français */
+        .flag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .flag img {
+            width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Le Savoir-Faire Français</h2>
+
+        <!-- Section pour afficher le drapeau français -->
+        <div class="flag">
+            <img src="main/drapeau-france-2.png" alt="Drapeau Français">
+        </div>
+
         <div id="chatbox"></div>
         <div class="input-container">
             <input type="text" id="userInput" placeholder="Message">
