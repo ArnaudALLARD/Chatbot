@@ -32,7 +32,7 @@ if (!$apiKey) {
 
 // Si c'est la première interaction, envoyer l'introduction
 if ($userMessage === "start") {
-    $introduction = "Bonjour ami Canadien ! Le savoir-faire français te passionne ? Ça tombe bien, je suis un expert ! 
+    $introduction = "Bonjour ami Canadien ! Le savoir-faire français t'intéresse ? Ça tombe bien, je suis un expert ! 
     Savais-tu que la France est renommée pour son excellence dans l’artisanat, la gastronomie et l’innovation, 
     du travail du cuir à la haute cuisine en passant par l’aéronautique ? 
     Tu veux en découvrir davantage sur un domaine en particulier ou entendre une anecdote fascinante ?
