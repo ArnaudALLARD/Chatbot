@@ -133,11 +133,11 @@ h2 {
 .user {
     background: #007bff;
     color: white;
-    text-align: right;
     float: right;
     clear: both;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     align-self: flex-end;
+    text-align: left; /* Alignement du texte à gauche */
 }
 
 /* Message du chatbot */
