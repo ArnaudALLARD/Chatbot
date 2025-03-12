@@ -42,6 +42,19 @@ if ($userMessage === "start") {
     exit;
 }
 
+// Récupérer l'adresse IP du visiteur
+if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    // Si le site est derrière un proxy, cette en-tête contiendra l'IP réelle
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+    // Sinon, l'adresse IP directe
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+
+// Enregistrer l'IP dans un fichier logs.txt avec la date et l'heure
+$file = 'logs.txt'; // Assurez-vous que le fichier logs.txt est accessible en écriture
+file_put_contents($file, "IP: $ip - Message: $userMessage - Date: " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
+
 // Configuration de la requête pour OpenAI
 $apiUrl = "https://api.openai.com/v1/chat/completions";
 $postData = [
