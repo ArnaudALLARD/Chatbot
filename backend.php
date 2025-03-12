@@ -2,13 +2,26 @@
 // Activer les headers pour JSON et les CORS
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: POST, GET");  // Ajout du support pour la méthode GET
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Activer l'affichage des erreurs pour le débogage
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+// Si la requête est de type GET, afficher les logs
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $file = 'logs.txt'; // Assurez-vous que le fichier logs.txt est accessible en écriture
+
+    if (file_exists($file)) {
+        $logs = file_get_contents($file);  // Lire tout le contenu du fichier
+        echo json_encode(["logs" => nl2br($logs)]);  // Retourner les logs au format JSON
+    } else {
+        echo json_encode(["error" => "Fichier de logs non trouvé"]);
+    }
+    exit;
+}
 
 // Récupérer les données de la requête POST
 $data = json_decode(file_get_contents("php://input"), true);
